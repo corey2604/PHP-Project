@@ -1,6 +1,5 @@
 <?php
-require 'vendor/autoload.php';
-require 'components/navbar.php';
+require_once(__DIR__.'/../whatShouldIWatchFunctions.php');
 ?>
 
 <!doctype html>

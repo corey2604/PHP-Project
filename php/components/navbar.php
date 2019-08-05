@@ -13,6 +13,9 @@ function getNavbar() {
       <li class=\"nav-item\">
         <a class=\"nav-link\" href=\"currentlyShowing.php\">Currently showing movies</a>
       </li>
+      <li class=\"nav-item\">
+        <a class=\"nav-link\" href=\"myMovies.php\">My movies</a>
+      </li>
     </ul>
   </div>
 </nav>";
