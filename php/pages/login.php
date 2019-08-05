@@ -3,10 +3,10 @@
  ?>
 <!doctype html>
 <html>
-<?php getHead("Register") ?>
+<?php getHead("Log In") ?>
 <body>
 <?php getNavbar() ?>
-<?php getRegistrationForm() ?>
+<?php getLogInForm() ?>
 </body>
 
 </html>

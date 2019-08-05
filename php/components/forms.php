@@ -20,7 +20,7 @@
 <?php } ?>
 
 <?php function getLogInForm() { ?>
-  <h2>Register here</h2>
+  <h2>Log In</h2>
   <div class="search-form-container">
       <form id="registrationForm" method="post" action="logIn.php">
           <div class="input-row">
