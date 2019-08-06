@@ -13,6 +13,7 @@ function connectToDatabase() {
   }
 }
 
+
 function register_user($email, $password){
   // connect to db
  $conn = connectToDatabase();
@@ -37,6 +38,7 @@ function register_user($email, $password){
  return true;
 }
 
+
 function login($username, $password) {
 // check username and password with db
 // if yes, return true
@@ -57,6 +59,29 @@ function login($username, $password) {
      return true;
   } else {
      throw new Exception('Could not log you in.');
+  }
+}
+
+
+function storeMovieAsFavourite($title, $overview, $posterPath) {
+// check username and password with db
+// if yes, return true
+// else throw exception
+
+  // connect to db
+  $conn = connectToDatabase();
+
+  // check if username is unique
+  $result = $conn->query("INSERT INTO projectmovies (title, overview, poster_path) VALUES
+                         ('".$title."', '".$overview."', '".$poster_path."')");
+  if (!$result) {
+     throw new Exception('Could not store movie as favourite.');
+  }
+
+  if ($result->num_rows>0) {
+     return true;
+  } else {
+     throw new Exception('Could not store movie as favourite.');
   }
 }
 ?>
