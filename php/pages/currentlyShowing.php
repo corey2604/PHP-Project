@@ -4,11 +4,7 @@ require_once(__DIR__.'/../whatShouldIWatchFunctions.php');
 $keyword = getKeyWordIfPresent();
 $movieChunks = getCurrentlyShowingMovies();
 ?>
-  <!doctype html>
-  <html>
-  <?php getHead("Currently Showing"); ?>
-
-  <body>
+  <?php getHeader("Currently Showing"); ?>
     <?php getNavbar() ?>
     <div class="container">
       <?php foreach($movieChunks as $movieRow): ?>

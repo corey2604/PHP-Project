@@ -1,12 +1,7 @@
 <?php
-  require_once(__DIR__.'/../whatShouldIWatchFunctions.php');
- ?>
-<!doctype html>
-<html>
-<?php getHead("Register") ?>
-<body>
-<?php getNavbar() ?>
-<?php getRegistrationForm() ?>
-</body>
-
-</html>
+require_once(__DIR__.'/../whatShouldIWatchFunctions.php');
+getHeader("Register");
+getNavbar();
+getRegistrationForm();
+getFooter();
+?>

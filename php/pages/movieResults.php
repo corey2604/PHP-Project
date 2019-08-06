@@ -4,15 +4,7 @@ require_once(__DIR__.'/../whatShouldIWatchFunctions.php');
 $keyword = getKeyWordIfPresent();
 $movieChunks = searchForMovies($keyword);
   ?>
-  <!doctype html>
-  <html>
-
-  <head>
-      <title>Search For Movie</title>
-
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  </head>
-  <body>
+  <?php getHeader("Movie Results"); ?>
     <?php getNavbar(); ?>
     <div class="container">
       <?php foreach($movieChunks as $movieRow): ?>
@@ -44,5 +36,4 @@ $movieChunks = searchForMovies($keyword);
         </div>
         <?php endforeach; ?>
         </div>
-</body>
-</html>
+<?php getFooter() ?>

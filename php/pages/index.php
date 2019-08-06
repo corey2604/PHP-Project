@@ -119,6 +119,4 @@ require_once(__DIR__.'/../whatShouldIWatchFunctions.php');
     <div class="response <?php echo $response[" type "]; ?>">
         <?php echo $response["message"]; ?> </div>
     <?php }?>
-</body>
-
-</html>
+<?php getFooter() ?>
