@@ -1,9 +1,7 @@
 <?php
 require __DIR__.'/../../vendor/autoload.php';
-$API_KEY = "1fd53134883fb4e950c4500c87738789";
 use GuzzleHttp\Client;
 use Carbon\Carbon;
-$client = new GuzzleHttp\Client();
 
 function getCurrentlyShowingMovies() {
   $API_KEY = "1fd53134883fb4e950c4500c87738789";

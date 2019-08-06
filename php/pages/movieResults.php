@@ -36,6 +36,7 @@ $movieChunks = searchForMovies($keyword);
                 </div>
                    <div class="card-footer">
                      <a href="" class="btn btn-primary">Store as Favourite</a>
+                     <a href="" class="btn btn-primary">View Similar Recommendations</a>
                    </div>
              </div>
          </div>

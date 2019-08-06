@@ -22,7 +22,7 @@
 <?php function getLogInForm() { ?>
   <h2>Log In</h2>
   <div class="search-form-container">
-      <form id="registrationForm" method="post" action="logIn.php">
+      <form id="registrationForm" method="post" action="member.php">
           <div class="input-row">
             <div class="form-group">
               Email : <input class="input-field" type="text" id="email" name="email" placeholder="">

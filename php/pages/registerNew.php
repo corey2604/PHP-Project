@@ -35,7 +35,11 @@
 
     // attempt to register
     // this function can also throw an exception
-    //register($username, $email, $passwd);
+    try{
+      register_user($email, $password);
+    } catch (Exception $e) {
+      echo "$e";
+    }
     // register session variable
     $_SESSION['valid_user'] = $email;
 
