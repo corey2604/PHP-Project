@@ -14,10 +14,12 @@ $movieChunks = getCurrentlyShowingMovies();
       <?php foreach($movieChunks as $movieRow): ?>
       <div class="row">
          <?php foreach($movieRow as $movie):
+          $movieId = $movie['id'];
           $title = $movie['title'];
           $overview = $movie['overview'];
           $posterPath = $movie['poster_path'];
           $releaseDate = $movie['release_date'];
+          $genres = $movie['genre_ids'];
           ?>
 
           <div class="col-md-3 d-flex align-items-stretch">
@@ -29,6 +31,8 @@ $movieChunks = getCurrentlyShowingMovies();
                      <div class="card-body flex-column h-100">
                        <h6 class="card-text textmuted"><?php echo $overview; ?></h6>
                        Release Date:<h6 class="card-text textmuted"><?php echo $releaseDate; ?></h6>
+                       Genre(s):
+                       <?php getGenres($movieId) ?>
                      </div>
                    </div>
                 </div>

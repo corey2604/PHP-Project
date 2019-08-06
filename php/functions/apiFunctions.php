@@ -19,6 +19,21 @@ function getCurrentlyShowingMovies() {
   return $movieChunks = array_chunk($movies, 4);
 }
 
+function getGenres($movieId) {
+  $API_KEY = "1fd53134883fb4e950c4500c87738789";
+  $client = new GuzzleHttp\Client();
+  $response = $client->get("https://api.themoviedb.org/3/movie/$movieId", [
+    'query' => [
+      'api_key' => $API_KEY,
+    ]
+  ]);
+  $value = json_decode($response->getBody(), true);
+  $genres = $value["genres"];
+  foreach($genres as $genre): ?>
+     <h6 class="card-text textmuted"><?php echo $genre["name"]; ?></h6>
+  <?php endforeach;
+}
+
 function searchForMovies($keyword) {
   $API_KEY = "1fd53134883fb4e950c4500c87738789";
   $client = new GuzzleHttp\Client();
