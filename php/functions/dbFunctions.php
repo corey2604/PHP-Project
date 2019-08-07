@@ -72,6 +72,8 @@ function storeMovieAsFavourite($userId, $title, $overview, $posterPath, $genres)
   // connect to db
   $conn = connectToDatabase();
 
+  if(checkFavouriteMovieIsNew($conn, $title, $overview, $posterPath)){
+
   $query = 'INSERT INTO projectmovies (title, overview, poster_path) VALUES (?, ?, ?)';
   $stmt = $conn->prepare($query);
   $stmt->bind_param('sss', $title, $overview, $posterPath);
@@ -92,20 +94,35 @@ function storeMovieAsFavourite($userId, $title, $overview, $posterPath, $genres)
   $stmt->free_result();
 
   foreach(json_decode($genres, true) as $genre):
-    $api_id = $genre["id"];
+    $genre_id = $genre["id"];
     $name = $genre["name"];
-    $query = 'INSERT INTO projectgenres (api_id, name) VALUES (?, ?)';
+    echo $genre_id;
+    echo $name;
+    $query = 'INSERT INTO projectgenres (id, name) VALUES (?, ?)';
     $stmt = $conn->prepare($query);
-    $stmt->bind_param('ds', $api_id, $name);
+    $stmt->bind_param('ds', $genre_id, $name);
     $stmt->execute();
     $stmt->free_result();
-    $genre_id = getGenreId($api_id, $name);
     $query = 'INSERT INTO projectmoviegenres (movie_id, genre_id) VALUES (?, ?)';
     $stmt = $conn->prepare($query);
     $stmt->bind_param('dd', $movie_id, $genre_id);
     $stmt->execute();
     $stmt->free_result();
   endforeach;
+}
+}
+
+function checkFavouriteMovieIsNew($conn, $title, $overview, $posterPath) {
+  $query = 'SELECT `projectusermovies`.movie_id FROM `projectusermovies` INNER JOIN `projectmovies` ON `projectusermovies`.movie_id = `projectmovies`.id WHERE title = ? AND overview = ? AND poster_path = ?';
+  $stmt = $conn->prepare($query);
+  $stmt->bind_param('sss', $title, $overview, $posterPath);
+  $stmt->execute();
+  $stmt->store_result();
+  if ($stmt->num_rows > 0) {
+    echo "<div class=\"container\"><div class=\"alert alert-danger\">This movie has already been added to your favourites.</div></div>";
+    return false;
+  }
+  return true;
 }
 
 function displayMyMovies($userId) {
@@ -160,7 +177,7 @@ function getAllMoviesFromDatabaseForUser($userId) {
 
 function getAllGenresFromDatabaseForUser($userId) {
     $conn = connectToDatabase();
-    $query = 'SELECT `projectmoviegenres`.id FROM `projectmoviegenres` INNER JOIN projectusermovies ON `projectmoviegenres`.movie_id = `projectusermovies`.movie_id WHERE `projectusermovies`.user_id = ?';
+    $query = 'SELECT `projectmoviegenres`.genre_id FROM `projectmoviegenres` INNER JOIN projectusermovies ON `projectmoviegenres`.movie_id = `projectusermovies`.movie_id WHERE `projectusermovies`.user_id = ?';
     $stmt = $conn->prepare($query);
     $stmt->bind_param('d', $userId);
     $stmt->execute();
@@ -170,7 +187,7 @@ function getAllGenresFromDatabaseForUser($userId) {
 
 function getMostPopularGenreIdFromDatabaseForUser($userId) {
     $conn = connectToDatabase();
-    $query = 'SELECT `projectmoviegenres`.genre_id FROM `projectmoviegenres` INNER JOIN projectusermovies ON `projectmoviegenres`.movie_id = `projectusermovies`.movie_id WHERE `projectusermovies`.user_id = ? GROUP BY `projectmoviegenres`.id ORDER BY count(*) desc LIMIT 1;';
+    $query = 'SELECT `projectmoviegenres`.genre_id FROM `projectmoviegenres` INNER JOIN projectusermovies ON `projectmoviegenres`.movie_id = `projectusermovies`.movie_id WHERE `projectusermovies`.user_id = ? GROUP BY `projectmoviegenres`.genre_id ORDER BY count(*) desc LIMIT 1;';
     $stmt = $conn->prepare($query);
     $stmt->bind_param('d', $userId);
     $stmt->execute();
@@ -239,30 +256,12 @@ function getMovieId($title, $overview, $posterPath) {
   return $id;
 }
 
-function getGenreId($api_id, $name) {
-// check username and password with db
-// if yes, return true
-// else throw exception
-
-  // connect to db
-  $conn = connectToDatabase();
-  $query = 'SELECT id FROM `projectgenres` WHERE api_id = ? AND name = ?';
-  $stmt = $conn->prepare($query);
-  $stmt->bind_param('ds', $api_id, $name);
-  $stmt->execute();
-  $stmt->store_result();
-  $stmt->bind_result($id);
-  $stmt->fetch();
-  $stmt->close();
-  return $id;
-}
-
 function doesUserHaveRecommendations($userId) {
   $stmt = getAllMoviesFromDatabaseForUser($userId);
   if (!$stmt->num_rows > 0) {
     echo "<div class=\"container\"><div class=\"alert alert-danger\">Please add some movies to your favourites to receive tailored recommendations</div></div>";
     return false;
-  } 
+  }
 }
 
 function getMostPopularGenreName($genre_id) {

@@ -17,8 +17,7 @@ CREATE TABLE `ProjectMovies` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `ProjectGenres` (
- `id` int(11) NOT NULL AUTO_INCREMENT,
- `api_id` int(11) NOT NULL,
+ `id` int(11) NOT NULL,
  `name` varchar(50) NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

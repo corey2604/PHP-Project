@@ -6,37 +6,12 @@ $movieChunks = getCurrentlyShowingMovies();
 ?>
   <?php getHeader("Currently Showing"); ?>
     <div class="container">
-      <?php echo$movieChunks;foreach($movieChunks as $movieRow): ?>
+      <?php foreach($movieChunks as $movieRow): ?>
       <div class="row">
          <?php foreach($movieRow as $movie):
-          $movieId = $movie['id'];
-          $title = $movie['title'];
-          $overview = $movie['overview'];
-          $posterPath = $movie['poster_path'];
-          $releaseDate = $movie['release_date'];
-          $genres = $movie['genre_ids'];
-          ?>
-
-          <div class="col-md-3 d-flex align-items-stretch">
-             <div class="card h-100 d-flex flex-column justify-content-between">
-                <div class="card-block">
-                   <div class="card flex-fill">
-                     <h4 class="cardtitle flex-column h-100 align-items-center justify-content-center" style="min-height: 9rem;"><?php echo $title?></h4>
-                     <img class="card-img-top" src="<?php echo "http://image.tmdb.org/t/p/w185$posterPath" ?>" >
-                     <div class="card-body flex-column h-100">
-                       <h6 class="card-text textmuted"><?php echo $overview; ?></h6>
-                       Release Date:<h6 class="card-text textmuted"><?php echo $releaseDate; ?></h6>
-                       Genre(s):
-                       <?php getGenres($movieId) ?>
-                     </div>
-                   </div>
-                </div>
-                   <div class="card-footer">
-                     <a href="" class="btn btn-primary">Store as Favourite</a>
-                   </div>
-             </div>
-         </div>
-         <?php endforeach; ?>
+           $id = htmlspecialchars($movie['id']);
+           echo getMovieData($id);
+         endforeach; ?>
         </div>
         <?php endforeach; ?>
         </div>

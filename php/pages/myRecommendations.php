@@ -5,7 +5,7 @@
   echo "Your most popular genre is: ";
   $mostPopularGenreId = getMostPopularGenreIdFromDatabaseForUser($_SESSION['valid_user']);
   echo getMostPopularGenreName($mostPopularGenreId);
-  $movieChunks = searchForMoviesInGenre(28);?>
+  $movieChunks = searchForMoviesInGenre($mostPopularGenreId);?>
   <h1>Recommendations based on your most popular genre</h1>
   <?php
   foreach($movieChunks as $movieRow): ?>

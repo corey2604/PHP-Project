@@ -3,7 +3,8 @@ function getStandardCard($movieData) {
   $title = $movieData["title"];
   $tagLine = $movieData["tagline"];
   $posterPath = $movieData["poster_path"];
-  $genres = $movieData["genres"]
+  $releaseDate = $movieData['release_date'];
+  $genres = $movieData["genres"];
   ?>
   <div class="col-md-3 d-flex align-items-stretch">
      <div class="card h-100 d-flex flex-column justify-content-between">
@@ -13,6 +14,7 @@ function getStandardCard($movieData) {
              <img class="card-img-top" src="<?php echo "http://image.tmdb.org/t/p/w185$posterPath" ?>" >
              <div class="card-body flex-column h-100">
                <h6 class="card-text textmuted"><?php echo stripslashes($tagLine); ?></h6>
+               Release Date:<h6 class="card-text textmuted"><?php echo $releaseDate; ?></h6>
                Genre(s): <h6 class="card-text textmuted"><?php echo getGenres($movieData); ?></h6>
              </div>
            </div>
