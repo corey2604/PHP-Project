@@ -22,14 +22,14 @@
 <?php function getLogInForm() { ?>
 <div class="sidenav">
          <div class="login-main-text">
-            <h2>Application<br> Login Page</h2>
-            <p>Login or register from here to access.</p>
+            <h2>Welcome to WhatShouldIWatch.com<br></h2>
+            <p>Login or register here to search an archive of movies and receive personalised recommendations.</p>
          </div>
       </div>
       <div class="main">
          <div class="col-md-6 col-sm-12">
             <div class="login-form">
-               <form>
+               <form action="member.php" method="post">
                   <div class="form-group">
                      <label>User Name</label>
                      <input type="text" class="form-control" id="email" name="email" placeholder="User Name">
@@ -44,5 +44,5 @@
             </div>
          </div>
       </div>
-    
+
 <?php } ?>
