@@ -50,4 +50,20 @@ function searchForMovies($keyword) {
   $movies = $value["results"];
   return $movieChunks = array_chunk($movies, 4);
 }
+
+function searchForMoviesInGenre($genreId) {
+  $API_KEY = "1fd53134883fb4e950c4500c87738789";
+  $client = new GuzzleHttp\Client();
+  $response = $client->get("https://api.themoviedb.org/3/discover/movie", [
+    'query' => [
+      'api_key' => $API_KEY,
+      'with_genres' => $genreId,
+      'sort_by' => 'popularity.desc',
+      'page' => 1,
+    ]
+  ]);
+  $value = json_decode($response->getBody(), true);
+  $movies = $value["results"];
+  return $movieChunks = array_chunk($movies, 4);
+}
 ?>

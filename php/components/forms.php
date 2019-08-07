@@ -20,19 +20,29 @@
 <?php } ?>
 
 <?php function getLogInForm() { ?>
-  <h2>Log In</h2>
-  <div class="search-form-container">
-      <form id="registrationForm" method="post" action="member.php">
-          <div class="input-row">
-            <div class="form-group">
-              Email : <input class="input-field" type="text" id="email" name="email" placeholder="">
+<div class="sidenav">
+         <div class="login-main-text">
+            <h2>Application<br> Login Page</h2>
+            <p>Login or register from here to access.</p>
+         </div>
+      </div>
+      <div class="main">
+         <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+               <form>
+                  <div class="form-group">
+                     <label>User Name</label>
+                     <input type="text" class="form-control" id="email" name="email" placeholder="User Name">
+                  </div>
+                  <div class="form-group">
+                     <label>Password</label>
+                     <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                  </div>
+                  <button type="submit" class="btn btn-black">Login</button>
+                  <button type="submit" class="btn btn-secondary">Register</button>
+               </form>
             </div>
-            <div class="form-group">
-              Password : <input class="input-field" type="password" id="password" name="password" placeholder="">
-            </div>
-          </div>
-
-          <input class="btn-submit" type="submit" name="submit" value="Search">
-      </form>
-  </div>
+         </div>
+      </div>
+    
 <?php } ?>

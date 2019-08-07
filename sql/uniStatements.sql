@@ -40,3 +40,12 @@ CREATE TABLE `ProjectMovieGenres` (
   FOREIGN KEY (movie_id) REFERENCES ProjectMovies(id),
   FOREIGN KEY (genre_id) REFERENCES ProjectGenres(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `ProjectUserGenres` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `user_id` int(11) NOT NULL,
+ `genre_id` int(11) NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (user_id) REFERENCES ProjectUsers(id),
+  FOREIGN KEY (genre_id) REFERENCES ProjectGenres(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

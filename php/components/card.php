@@ -18,7 +18,7 @@ function getStandardCard($movieData) {
            </div>
         </div>
            <div class="card-footer">
-             <a href="" class="btn btn-primary" onclick="<?php echo "insertMovieIntoDb("."'".addslashes($title)."', '".addslashes($tagLine)."', '".$posterPath."', '".addslashes($tagLine)."');return false;" ?>">Store as Favourite</a>
+             <a href="" class="btn btn-primary" onclick="<?php echo "insertMovieIntoDb("."'".addslashes($title)."', '".addslashes($tagLine)."', '".$posterPath."', '".htmlentities(json_encode($genres))."');return false;" ?>">Store as Favourite</a>
              <a href="" class="btn btn-primary">View Similar Recommendations</a>
            </div>
      </div>
