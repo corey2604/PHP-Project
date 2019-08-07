@@ -5,9 +5,8 @@ $keyword = getKeyWordIfPresent();
 $movieChunks = getCurrentlyShowingMovies();
 ?>
   <?php getHeader("Currently Showing"); ?>
-    <?php getNavbar() ?>
     <div class="container">
-      <?php foreach($movieChunks as $movieRow): ?>
+      <?php echo$movieChunks;foreach($movieChunks as $movieRow): ?>
       <div class="row">
          <?php foreach($movieRow as $movie):
           $movieId = $movie['id'];

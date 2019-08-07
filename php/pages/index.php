@@ -103,7 +103,7 @@ require_once(__DIR__.'/../whatShouldIWatchFunctions.php');
 </head>
 
 <body>
-<?php getNavbar() ?>
+<?php getNavbar();?>
     <h2>Search For Movie</h2>
     <div class="search-form-container">
         <form id="keywordForm" method="post" action="movieResults.php">

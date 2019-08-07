@@ -1,6 +1,5 @@
 <?php
   require_once(__DIR__.'/../whatShouldIWatchFunctions.php');
-  getHeader("Log In");
-  getLogInForm();
+  getHeader("My Recommendations");
   getFooter();
-?>
+ ?>

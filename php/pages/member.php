@@ -19,10 +19,11 @@ $password = $_POST['password'];
 if ($username && $password) {
 // they have just tried logging in
   try  {
+    echo"id:";
     login($username, $password);
-    echo "SUCCESSFUL LOGIN";
     // if they are in the database register the user id
-    $_SESSION['valid_user'] = $username;
+    $_SESSION['valid_user'] = getUserId($username, $password);
+    echo '<a href="index.php">HOME</a>';
   }
   catch(Exception $e)  {
     // unsuccessful login

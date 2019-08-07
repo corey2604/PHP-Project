@@ -29,7 +29,7 @@ CREATE TABLE `ProjectUserMovies` (
  `movie_id` int(11) NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (user_id) REFERENCES ProjectUsers(id),
-  FOREIGN KEY (blocked_user_id) REFERENCES ProjectMovies(id)
+  FOREIGN KEY (movie_id) REFERENCES ProjectMovies(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `ProjectMovieGenres` (

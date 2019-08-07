@@ -9,7 +9,8 @@ function getCurrentlyShowingMovies() {
   $response = $client->get("https://api.themoviedb.org/3/discover/movie", [
     'query' => [
       'api_key' => $API_KEY,
-      'primary_release_date.gte' => Carbon::now()->subDay(7)->format('Y-m-d')
+      'primary_release_date.gte' => Carbon::now()->subDay(7)->format('Y-m-d'),
+      'page' => 1,
     ]
   ]);
   $value = json_decode($response->getBody(), true);
@@ -17,7 +18,14 @@ function getCurrentlyShowingMovies() {
   return $movieChunks = array_chunk($movies, 4);
 }
 
-function getGenres($movieId) {
+function getGenres($movieData) {
+  $genres = $movieData["genres"];
+  foreach($genres as $genre): ?>
+     <h6 class="card-text textmuted"><?php echo $genre["name"]; ?></h6>
+  <?php endforeach;
+}
+
+function getMovieData($movieId) {
   $API_KEY = "1fd53134883fb4e950c4500c87738789";
   $client = new GuzzleHttp\Client();
   $response = $client->get("https://api.themoviedb.org/3/movie/$movieId", [
@@ -25,11 +33,7 @@ function getGenres($movieId) {
       'api_key' => $API_KEY,
     ]
   ]);
-  $value = json_decode($response->getBody(), true);
-  $genres = $value["genres"];
-  foreach($genres as $genre): ?>
-     <h6 class="card-text textmuted"><?php echo $genre["name"]; ?></h6>
-  <?php endforeach;
+  return getStandardCard(json_decode($response->getBody(), true));
 }
 
 function searchForMovies($keyword) {
@@ -38,7 +42,8 @@ function searchForMovies($keyword) {
   $response = $client->get("https://api.themoviedb.org/3/search/movie", [
     'query' => [
       'api_key' => $API_KEY,
-      'query' => $keyword
+      'query' => $keyword,
+      'page' => 1,
     ]
   ]);
   $value = json_decode($response->getBody(), true);

@@ -1,4 +1,16 @@
 <?php
+function checkValidUser() {
+  session_start();
+// see if somebody is logged in and notify them if not
+  if (isset($_SESSION['valid_user']))  {
+      echo "Logged in as ".$_SESSION['valid_user'].".<br>";
+  } else {
+     // they are not logged in
+     echo 'You are not logged in. Log In <a href="logIn.php">here</a><br>';
+     exit;
+  }
+}
+
 function getKeyWordIfPresent() {
   return isset($_POST["keyword"]) ? $_POST["keyword"] : '';
 }
