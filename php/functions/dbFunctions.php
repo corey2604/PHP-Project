@@ -129,18 +129,21 @@ function displayMyMovies($userId) {
   global $movies;
     $stmt = getAllMoviesFromDatabaseForUser($userId);
     $stmt->bind_result($id, $title, $overview, $posterPath);
-    $count = 0;
-    while($stmt->fetch()) {
+    $count = 0;?>
+    <div class="container">
+    <?php while($stmt->fetch()) {
       if ($count == 0) {
-        ?><div class="row">
+        ?><div class="row mt-3">
       <?php }
       $count++;
       $movies .= getDeleteCard($id, $title, $overview, $posterPath);
      if ($count == 4) {?>
-        </div>;
+        </div>
         <?php $count = 0;
     }
-  }
+  }?>
+</div>
+    <?php
     $stmt->free_result();
     return $movies;
 }
@@ -157,7 +160,7 @@ function displayMyGenres($userId) {
       $count++;
       $movies .= "<p>$id</p>";
      if ($count == 4) {?>
-        </div>;
+        </div>
         <?php $count = 0;
     }
   }

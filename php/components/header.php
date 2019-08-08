@@ -10,11 +10,12 @@ function getHeader($title) { ?>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
       <script src="../../js/ajaxFunctions.js" type="text/javascript"></script>
       <link rel="stylesheet" type="text/css" href="../../css/login.css">
+      <link rel="stylesheet" type="text/css" href="../../css/movies.css">
   </head>
   <body>
   <?php
-  if ($title != "Log In") {
-    getNavbar();
+  if ($title != "Log In" && $title != "Register" && $title != "Log Out") {
+    getNavbar($title);
   }
 }
 ?>

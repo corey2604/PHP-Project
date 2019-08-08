@@ -1,22 +1,33 @@
 <?php function getRegistrationForm() { ?>
-  <h2>Register here</h2>
-  <div class="search-form-container">
-      <form id="registrationForm" method="post" action="registerNew.php">
-          <div class="input-row">
-            <div class="form-group">
-              Email : <input class="input-field" type="text" id="email" name="email" placeholder="">
-            </div>
-            <div class="form-group">
-              Password : <input class="input-field" type="password" id="password" name="password" placeholder="">
-            </div>
-            <div class="form-group">
-              Confirm Password : <input class="input-field" type="password" id="confirm_password" name="confirm_password" placeholder="">
-            </div>
-          </div>
-
-          <input class="btn-submit" type="submit" name="submit" value="Search">
-      </form>
-  </div>
+  <div class="sidenav">
+           <div class="login-main-text">
+              <h2>Create Your Account<br></h2>
+              <p>Create your account and start receiving personalised movie recommendations.</p>
+           </div>
+        </div>
+        <div class="main">
+           <div class="col-md-6 col-sm-12">
+              <div class="login-form">
+                 <form action="registerNew.php" method="post">
+                    <div class="form-group">
+                       <label>User Name</label>
+                       <input type="text" class="form-control" id="email" name="email" placeholder="User Name">
+                    </div>
+                    <div class="form-group">
+                       <label>Password</label>
+                       <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                       <label>Confirm Password</label>
+                       <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-black btn-block">Register</button>
+                    <div class="text-center pt-2">Already have an account?</div>
+                    <a onclick="window.location.href = 'login.php';" class="btn btn-secondary text-white btn-block">Log In</a>
+                 </form>
+              </div>
+           </div>
+        </div>
 <?php } ?>
 
 <?php function getLogInForm() { ?>
@@ -38,8 +49,9 @@
                      <label>Password</label>
                      <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                   </div>
-                  <button type="submit" class="btn btn-black">Login</button>
-                  <button type="submit" class="btn btn-secondary">Register</button>
+                  <button type="submit" class="btn btn-black btn-block">Login</button>
+                  <div class="text-center pt-2">Don't have an account?</div>
+                  <a onclick="window.location.href = 'register.php';" class="btn btn-secondary text-white btn-block">Register</a>
                </form>
             </div>
          </div>

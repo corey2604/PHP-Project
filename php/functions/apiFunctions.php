@@ -2,10 +2,12 @@
 require __DIR__.'/../../vendor/autoload.php';
 use GuzzleHttp\Client;
 use Carbon\Carbon;
+$API_KEY = "1fd53134883fb4e950c4500c87738789";
+$client = new GuzzleHttp\Client();
 
 function getCurrentlyShowingMovies() {
-  $API_KEY = "1fd53134883fb4e950c4500c87738789";
-  $client = new GuzzleHttp\Client();
+  global $API_KEY;
+  global $client;
   $response = $client->get("https://api.themoviedb.org/3/discover/movie", [
     'query' => [
       'api_key' => $API_KEY,
@@ -26,8 +28,8 @@ function getGenres($movieData) {
 }
 
 function getMovieData($movieId) {
-  $API_KEY = "1fd53134883fb4e950c4500c87738789";
-  $client = new GuzzleHttp\Client();
+  global $API_KEY;
+  global $client;
   $response = $client->get("https://api.themoviedb.org/3/movie/$movieId", [
     'query' => [
       'api_key' => $API_KEY,
@@ -37,8 +39,8 @@ function getMovieData($movieId) {
 }
 
 function searchForMovies($keyword) {
-  $API_KEY = "1fd53134883fb4e950c4500c87738789";
-  $client = new GuzzleHttp\Client();
+  global $API_KEY;
+  global $client;
   $response = $client->get("https://api.themoviedb.org/3/search/movie", [
     'query' => [
       'api_key' => $API_KEY,
