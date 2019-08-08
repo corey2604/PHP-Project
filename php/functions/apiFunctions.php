@@ -12,6 +12,7 @@ function getCurrentlyShowingMovies() {
     'query' => [
       'api_key' => $API_KEY,
       'primary_release_date.gte' => Carbon::now()->subDay(7)->format('Y-m-d'),
+      'primary_release_date.lte' => Carbon::now()->format('Y-m-d'),
       'page' => 1,
     ]
   ]);
@@ -20,8 +21,7 @@ function getCurrentlyShowingMovies() {
   return $movieChunks = array_chunk($movies, 4);
 }
 
-function getGenres($movieData) {
-  $genres = $movieData["genres"];
+function getGenresFromAPI($genres) {
   foreach($genres as $genre): ?>
      <h6 class="card-text textmuted"><?php echo $genre["name"]; ?></h6>
   <?php endforeach;
@@ -35,7 +35,7 @@ function getMovieData($movieId) {
       'api_key' => $API_KEY,
     ]
   ]);
-  return getStandardCard(json_decode($response->getBody(), true));
+  return $response;
 }
 
 function searchForMovies($keyword) {

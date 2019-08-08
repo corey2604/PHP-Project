@@ -1,5 +1,5 @@
 <?php
-function getHeader($title) { ?>
+function getHeader($title, $displayTitleText) { ?>
 <!doctype html>
 <html>
   <head>
@@ -15,7 +15,16 @@ function getHeader($title) { ?>
   <body>
   <?php
   if ($title != "Log In" && $title != "Register" && $title != "Log Out") {
-    getNavbar($title);
-  }
-}
+    getNavbar($title); ?>
+    <span id="errorLocation"></span>
+  <?php
+    if ($displayTitleText) {
+  ?>
+  <h1 class="text-center pt-5 font-weight-bold"><?php echo $title ?></h1>
+  <hr>
+  <?php
+    }
+  }?>
+ <div class="container">
+<?php }
 ?>

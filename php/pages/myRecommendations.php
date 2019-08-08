@@ -1,17 +1,13 @@
 <?php
   require_once(__DIR__.'/../whatShouldIWatchFunctions.php');
-  getHeader("My Recommendations");
-  doesUserHaveRecommendations($_SESSION['valid_user']);
-  ?>
-  <div class="container">
-  <?php
-    echo "Your most popular genre is: ";
+  getHeader("My Recommendations", true);
+  if (doesUserHaveRecommendations($_SESSION['valid_user'])) {
     $mostPopularGenreId = getMostPopularGenreIdFromDatabaseForUser($_SESSION['valid_user']);
-    echo getMostPopularGenreName($mostPopularGenreId);
     $movieChunks = searchForMoviesInGenre($mostPopularGenreId);?>
-    <h1>Recommendations based on your most popular genre</h1>
-    <?php getCardRows($movieChunks);?>
-  </div>
-    <?php
+    <h2 class="pt-3">Recommendations based on your most popular genre: <span class="font-weight-light"><?php echo getGenreNameFromId($mostPopularGenreId); ?></span></h2>
+    <?php getCardRows($movieChunks);
+  } else {
+    getMissingFavouritesDisplay("recommendations");
+  }
   getFooter();
  ?>
