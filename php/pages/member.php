@@ -19,11 +19,11 @@ $password = $_POST['password'];
 if ($username && $password) {
 // they have just tried logging in
   try  {
-    echo"id:";
     login($username, $password);
     // if they are in the database register the user id
     $_SESSION['valid_user'] = getUserId($username, $password);
-    echo '<a href="index.php">HOME</a>';
+    // Transfer the user to the index page on a successful login
+    header("Location: index.php");
   }
   catch(Exception $e)  {
     // unsuccessful login
