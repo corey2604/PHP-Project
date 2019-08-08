@@ -10,6 +10,10 @@ function checkValidUser() {
   }
 }
 
+function getPostValueIfPresent($value) {
+  return isset($_POST[$value]) ? $_POST[$value] : '';
+}
+
 function getKeyWordIfPresent() {
   return isset($_POST["keyword"]) ? $_POST["keyword"] : '';
 }

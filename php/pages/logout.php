@@ -8,10 +8,7 @@ $old_user = $_SESSION['valid_user'];
 // store  to test if they *were* logged in
 unset($_SESSION['valid_user']);
 $result_dest = session_destroy();
-getHeader("Log Out");
-
-// start output html
-echo 'Logging Out';
+getHeader("Log Out", false);
 
 if (!empty($old_user)) {
   if ($result_dest)  {?>

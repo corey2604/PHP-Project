@@ -30,6 +30,8 @@ function getNavbar($title) {
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="logout.php">Log Out</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="resetPassword.php">Reset Password</a>
         </div>
       </li>
     </ul>

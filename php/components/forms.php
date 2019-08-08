@@ -57,4 +57,29 @@
          </div>
       </div>
 
+<?php }
+
+function getPasswordResetForm() { ?>
+  <div class="form">
+     <form action="reset.php" method="post">
+        <div class="form-group">
+           <label>User Name</label>
+           <input type="text" readonly class="form-control-plaintext" id="username" name="username" value="<?php echo $_SESSION['valid_user']; ?>">
+        </div>
+        <div class="form-group">
+           <label>Original Password</label>
+           <input type="password" class="form-control" id="original_password" name="original_password" placeholder="Original Password">
+        </div>
+        <div class="form-group">
+           <label>New Password</label>
+           <input type="password" class="form-control" id="new_password" name="new_password" placeholder="New Password">
+        </div>
+        <div class="form-group">
+           <label>Confirm New Password</label>
+           <input type="password" class="form-control" id="new_password_confirm" name="new_password_confirm" placeholder="Confirm New Password">
+        </div>
+        <button type="submit" class="btn btn-black btn-block">Update</button>
+     </form>
+  </div>
+
 <?php } ?>

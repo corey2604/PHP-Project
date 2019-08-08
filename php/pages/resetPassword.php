@@ -1,5 +1,6 @@
 <?php
-  getHeader("Password Reset");
-  getSuccessMessage("GOT HERE");
+  require_once(__DIR__.'/../whatShouldIWatchFunctions.php');
+  getHeader("Password Reset", true);
+  getPasswordResetForm();
   getFooter();
 ?>
