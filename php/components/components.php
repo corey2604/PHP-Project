@@ -4,4 +4,5 @@
   require __DIR__.'/footer.php';
   require __DIR__.'/forms.php';
   require __DIR__.'/card.php';
+  require __DIR__.'/errorMessage.php';
  ?>
