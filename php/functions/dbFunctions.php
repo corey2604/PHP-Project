@@ -15,28 +15,34 @@ function connectToDatabase() {
 }
 
 
-function register_user($email, $password){
+function registerUser($email, $password){
   // connect to db
  $conn = connectToDatabase();
 
- // check if username is unique
- $result = $conn->query("select * from projectusers where username='".$email."'");
- if (!$result) {
-   throw new Exception('Could not execute query');
+ $hashedPassword = sha1($password);
+ $query = 'SELECT * FROM projectusers WHERE username = ?';
+ $stmt = $conn->prepare($query);
+ $stmt->bind_param('s', $email);
+ $stmt->execute();
+ $stmt->store_result();
+ if ($stmt->error) {
+   return "Could not register you in database - please try again later.";
+ } else if ($stmt->num_rows>0) {
+   return "Username is already taken.";
  }
+ $stmt->free_result();
 
- if ($result->num_rows>0) {
-   throw new Exception('That username is taken - go back and choose another one.');
+ $query = 'INSERT INTO projectusers(username, password, reg_date) VALUES (?, ?, now())';
+ $stmt = $conn->prepare($query);
+ $stmt->bind_param('ss', $email, $hashedPassword);
+ $stmt->execute();
+ $stmt->store_result();
+ if ($stmt->error) {
+   return "Could not register you in database - please try again later.";
  }
+ $stmt->free_result();
 
- // if ok, put in db
- $result = $conn->query("insert into projectusers(username, password, reg_date) values
-                        ('".$email."', sha1('".$password."'), now())");
- if (!$result) {
-   throw new Exception('Could not register you in database - please try again later.');
- }
-
- return true;
+ return "";
 }
 
 
@@ -47,19 +53,16 @@ function login($username, $password) {
 
   // connect to db
   $conn = connectToDatabase();
-
-  // check if username is unique
-  $result = $conn->query("select * from projectusers
-                         where username='".$username."'
-                         and password = sha1('".$password."')");
-  if (!$result) {
-     throw new Exception('Could not log you in.');
-  }
-
-  if ($result->num_rows>0) {
+  $hashedPassword = sha1($password);
+  $query = 'SELECT * FROM projectusers WHERE username = ? AND password = ?';
+  $stmt = $conn->prepare($query);
+  $stmt->bind_param('ss', $username, $hashedPassword);
+  $stmt->execute();
+  $stmt->store_result();
+  if ($stmt->num_rows>0) {
      return true;
   } else {
-     throw new Exception('Could not log you in.');
+     return false;
   }
 }
 
@@ -188,9 +191,9 @@ function deleteMovieFromFavourites($id) {
   $stmt->execute();
 
   if ($stmt->error) {
-    return "<div class=\"container\"><div class=\"alert alert-danger\">User $id was unable to be stored: $stmt->error</div></div>";
+    getErrorMessage("Movie was unable to be removed from favourites");
   } else {
-    return "<div class=\"container\"><div class=\"alert alert-success\">User $id successfully stored</div></div>";
+    getSuccessMessage("Movie was successfully removed from favourites");
   }
   $stmt->free_result();
 }
@@ -212,6 +215,45 @@ function getUserId($username, $password) {
   $stmt->fetch();
   $stmt->close();
   return $id;
+}
+
+function getUsernameFromId($userId) {
+// check username and password with db
+// if yes, return true
+// else throw exception
+
+  // connect to db
+  $conn = connectToDatabase();
+  $query = 'SELECT username FROM `projectusers` WHERE id = ?';
+  $stmt = $conn->prepare($query);
+  $stmt->bind_param('d', $userId);
+  $stmt->execute();
+  $stmt->store_result();
+  $stmt->bind_result($username);
+  $stmt->fetch();
+  $stmt->close();
+  return $username;
+}
+
+function updateUserPassword($userId, $originalPassword, $newPassword) {
+// check username and password with db
+// if yes, return true
+// else throw exception
+
+  // connect to db
+  $conn = connectToDatabase();
+  $originalHashedPassword = sha1($originalPassword);
+  $newHashedPassword = sha1($newPassword);
+  $query = 'UPDATE projectusers SET password = ? WHERE id = ? AND password = ?;';
+  $stmt = $conn->prepare($query);
+  $stmt->bind_param('sds', $newHashedPassword, $userId, $originalHashedPassword);
+  $stmt->execute();
+  if ($stmt->error) {
+    getErrorMessage("Unable to update your password. Please <a href=\"resetPassword.php\">try again</a>");
+  } else {
+    getSuccessMessage("Your Password has been successfully updated.");
+  }
+  $stmt->free_result();
 }
 
 function getMovieId($title, $overview, $posterPath) {

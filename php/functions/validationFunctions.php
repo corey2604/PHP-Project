@@ -1,9 +1,11 @@
 <?php
 function checkValidUser() {
-  session_start();
+  if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+  }
 // see if somebody is logged in and notify them if not
-  if (isset($_SESSION['valid_user']))  {
-      return $_SESSION['valid_user'];
+  if (isset($_SESSION['userId']))  {
+      return getUsernameFromId($_SESSION['userId']);
   } else {
      // If they are not logged in then automatically re-direct the user to the login screen
      header("Location: login.php");

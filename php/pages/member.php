@@ -21,7 +21,7 @@ if ($username && $password) {
   try  {
     login($username, $password);
     // if they are in the database register the user id
-    $_SESSION['valid_user'] = getUserId($username, $password);
+    $_SESSION['userId'] = getUserId($username, $password);
     // Transfer the user to the index page on a successful login
     header("Location: index.php");
   }

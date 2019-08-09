@@ -1,4 +1,4 @@
-<?php function getRegistrationForm() { ?>
+<?php function getRegistrationForm($usernameErr, $passwordErr, $confirmPasswordErr, $registerErr) { ?>
   <div class="sidenav">
            <div class="login-main-text">
               <h2>Create Your Account<br></h2>
@@ -8,19 +8,23 @@
         <div class="main">
            <div class="col-md-6 col-sm-12">
               <div class="login-form">
-                 <form action="registerNew.php" method="post">
+                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                     <div class="form-group">
                        <label>User Name</label>
                        <input type="text" class="form-control" id="email" name="email" placeholder="User Name">
+                       <?php if (!empty($usernameErr)) { echo getErrorMessage($usernameErr); } ?>
                     </div>
                     <div class="form-group">
                        <label>Password</label>
                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                       <?php if (!empty($passwordErr)) { echo getErrorMessage($passwordErr); } ?>
                     </div>
                     <div class="form-group">
                        <label>Confirm Password</label>
                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Password">
+                       <?php if (!empty($confirmPasswordErr)) { echo getErrorMessage($confirmPasswordErr); } ?>
                     </div>
+                    <?php if (!empty($registerErr)) { echo getErrorMessage($registerErr); } ?>
                     <button type="submit" class="btn btn-black btn-block">Register</button>
                     <div class="text-center pt-2">Already have an account?</div>
                     <a onclick="window.location.href = 'login.php';" class="btn btn-secondary text-white btn-block">Log In</a>
@@ -30,7 +34,7 @@
         </div>
 <?php } ?>
 
-<?php function getLogInForm() { ?>
+<?php function getLogInForm($usernameErr, $passwordErr, $loginErr) { ?>
 <div class="sidenav">
          <div class="login-main-text">
             <h2>Welcome to WhatShouldIWatch.com<br></h2>
@@ -40,15 +44,18 @@
       <div class="main">
          <div class="col-md-6 col-sm-12">
             <div class="login-form">
-               <form action="member.php" method="post">
+               <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                   <div class="form-group">
                      <label>User Name</label>
                      <input type="text" class="form-control" id="email" name="email" placeholder="User Name">
+                      <?php if (!empty($usernameErr)) { echo getErrorMessage($usernameErr); } ?>
                   </div>
                   <div class="form-group">
                      <label>Password</label>
                      <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                      <?php if (!empty($passwordErr)) { echo getErrorMessage($passwordErr); } ?>
                   </div>
+                  <?php if (!empty($loginErr)) { echo getErrorMessage($loginErr); } ?>
                   <button type="submit" class="btn btn-black btn-block">Login</button>
                   <div class="text-center pt-2">Don't have an account?</div>
                   <a onclick="window.location.href = 'register.php';" class="btn btn-secondary text-white btn-block">Register</a>
@@ -64,7 +71,7 @@ function getPasswordResetForm() { ?>
      <form action="reset.php" method="post">
         <div class="form-group">
            <label>User Name</label>
-           <input type="text" readonly class="form-control-plaintext" id="username" name="username" value="<?php echo $_SESSION['valid_user']; ?>">
+           <input type="text" readonly class="form-control-plaintext" id="username" name="username" value="<?php echo getUsernameFromId($_SESSION['userId']); ?>">
         </div>
         <div class="form-group">
            <label>Original Password</label>

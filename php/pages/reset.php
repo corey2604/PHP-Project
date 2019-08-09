@@ -5,7 +5,7 @@
 
   //create short variable names
   $username=getPostValueIfPresent('username');
-  $oldPassword=getPostValueIfPresent('old_password');
+  $originalPassword=getPostValueIfPresent('original_password');
   $newPassword=getPostValueIfPresent('new_password');
   $confirmNewPassword=getPostValueIfPresent('new_password_confirm');
   // start session which may be needed later
@@ -23,21 +23,21 @@
     }
 
     // passwords not the same
-    if ($new_password != $new_password_confirm) {
+    if ($newPassword != $confirmNewPassword) {
       throw new Exception('The passwords you entered do not match. Please <a href="resetPassword.php">go back</a> and try again.');
     }
 
     // check password length is ok
     // ok if username truncates, but passwords will get
     // munged if they are too long.
-    if ((strlen($new_password) < 6) || (strlen($new_password) > 16)) {
+    if ((strlen($newPassword) < 6) || (strlen($newPassword) > 16)) {
       throw new Exception('Your password must be between 6 and 16 characters. Please go back and try again.');
     }
 
     // attempt to register
     // this function can also throw an exception
     try{
-      getSuccessMessage("Looks good");
+      updateUserPassword($_SESSION["userId"], $originalPassword, $newPassword);
     } catch (Exception $e) {
       getErrorMessage($e);
     }

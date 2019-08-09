@@ -6,7 +6,7 @@ if (isset($_GET['title'])) {
   $overview = $_GET['overview'];
   $posterPath = $_GET['posterPath'];
   $genres= $_GET['genres'];
-  storeMovieAsFavourite($_SESSION['valid_user'], $title, $overview, $posterPath, $genres);
+  storeMovieAsFavourite($_SESSION['userId'], $title, $overview, $posterPath, $genres);
 } else {
   getErrorMessage("An unexpected error occurred. $title was unable to be stored as a favourite");
 }

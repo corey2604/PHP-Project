@@ -38,19 +38,17 @@
     try{
       register_user($email, $password);
     } catch (Exception $e) {
-      echo "$e";
+      getErrorMessage($e->getMessage());
     }
     // register session variable
-    $_SESSION['valid_user'] = $email;
+    $_SESSION['userId'] = getUserId($email, $password);
 
-    // provide link to members page
-    echo 'Registration successful';
-    echo 'Your registration was successful.  Go to the members page to start setting up your bookmarks!';
-    echo 'Go to members page';
+    header("Location: index.php");
 
   }
   catch (Exception $e) {
-     echo 'Problem:';
-     echo $e->getMessage();
+    getHeader("Unable to Register", true);
+     getErrorMessage($e->getMessage());
+     getFooter();
      exit;
   }
