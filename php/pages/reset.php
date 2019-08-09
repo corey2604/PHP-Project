@@ -13,12 +13,12 @@
   try   {
     // check forms filled in
 
-    if (!filled_out($_POST)) {
+    if (!isFilledOut($_POST)) {
       throw new Exception('Your password could not be reset as the reset form was not filled out out correctly - please <a href="resetPassword.php">go back</a> and try again.');
     }
 
     // email address not valid
-    if (!valid_email($username)) {
+    if (!validEmail($username)) {
       throw new Exception('An invalid email address was entered.  Please <a href="resetPassword.php">go back</a> and try again.');
     }
 
