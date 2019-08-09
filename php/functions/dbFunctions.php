@@ -165,6 +165,7 @@ function checkFavouriteMovieIsNew($conn, $userId, $title, $overview, $posterPath
 
 function displayMyMovies($userId)
 {
+  global $movies;
     //Return all movies that the current user has stored/selected as a favourite
     $stmt = getAllMoviesFromDatabaseForUser($userId);
     //If the user has movies stored as favourites then format the stored data to be output

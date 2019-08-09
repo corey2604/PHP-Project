@@ -53,6 +53,6 @@ function isFilledOut($formVars)
 function validEmail($email)
 {
     // return true if the email supplied matches this pattern
-    return (preg_match('/^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/', $email))
+    return (preg_match('/^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/', $email));
 }
 ?>
