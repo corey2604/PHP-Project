@@ -1,4 +1,8 @@
-<?php function getRegistrationForm($usernameErr, $passwordErr, $confirmPasswordErr, $registerErr) { ?>
+<?php
+//A component class used to display the forms associated with user account management e.g. Register, Login, Password reset
+function getRegistrationForm($usernameErr, $passwordErr, $confirmPasswordErr, $registerErr) {
+//This method receives any associated errors from form validation as parameters and will output these errors under their associated fields
+  ?>
   <div class="sidenav">
            <div class="login-main-text">
               <h2>Create Your Account<br></h2>
@@ -12,7 +16,9 @@
                     <div class="form-group">
                        <label>User Name</label>
                        <input type="text" class="form-control" id="email" name="email" placeholder="User Name">
-                       <?php if (!empty($usernameErr)) { echo getErrorMessage($usernameErr); } ?>
+                       <?php
+                       //This provides an example of how error messages are output with their associated fields
+                       if (!empty($usernameErr)) { echo getErrorMessage($usernameErr); } ?>
                     </div>
                     <div class="form-group">
                        <label>Password</label>
@@ -34,7 +40,9 @@
         </div>
 <?php } ?>
 
-<?php function getLogInForm($usernameErr, $passwordErr, $loginErr) { ?>
+<?php function getLogInForm($usernameErr, $passwordErr, $loginErr) {
+  //This method receives any associated errors from form validation as parameters and will output these errors under their associated fields
+  ?>
 <div class="sidenav">
          <div class="login-main-text">
             <h2>Welcome to WhatShouldIWatch.com<br></h2>
@@ -48,7 +56,9 @@
                   <div class="form-group">
                      <label>User Name</label>
                      <input type="text" class="form-control" id="email" name="email" placeholder="User Name">
-                      <?php if (!empty($usernameErr)) { echo getErrorMessage($usernameErr); } ?>
+                      <?php
+                      //This provides an example of how error messages are output with their associated fields
+                      if (!empty($usernameErr)) { echo getErrorMessage($usernameErr); } ?>
                   </div>
                   <div class="form-group">
                      <label>Password</label>
@@ -71,6 +81,7 @@ function getPasswordResetForm() { ?>
      <form action="reset.php" method="post">
         <div class="form-group">
            <label>User Name</label>
+           <!--This field is set to be read-only as the username is already supplied from the session and should not be altered-->
            <input type="text" readonly class="form-control-plaintext" id="username" name="username" value="<?php echo getUsernameFromId($_SESSION['userId']); ?>">
         </div>
         <div class="form-group">

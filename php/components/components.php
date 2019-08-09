@@ -1,11 +1,11 @@
 <?php
-  require __DIR__.'/navbar.php';
-  require __DIR__.'/header.php';
-  require __DIR__.'/footer.php';
-  require __DIR__.'/forms.php';
-  require __DIR__.'/card.php';
-  require __DIR__.'/movieSearchBar.php';
-  require __DIR__.'/movieResults.php';
-  require __DIR__.'/missingFavourites.php';
-  require __DIR__.'/mainHeader.php';
+  require_once(__DIR__.'/navbar.php');
+  require_once(__DIR__.'/header.php');
+  require_once(__DIR__.'/footer.php');
+  require_once(__DIR__.'/forms.php');
+  require_once(__DIR__.'/card.php');
+  require_once(__DIR__.'/movieSearchBar.php');
+  require_once(__DIR__.'/movieResults.php');
+  require_once(__DIR__.'/missingFavourites.php');
+  require_once(__DIR__.'/mainHeader.php');
  ?>

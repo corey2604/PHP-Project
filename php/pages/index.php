@@ -1,19 +1,16 @@
 <?php
 require_once(__DIR__.'/../whatShouldIWatchFunctions.php');
-$response = "";
+//Initialise that there is no error message
+$errorMessage = "";
+//If the user has submitted a keyword search...
 if (isset($_POST['submit']) )
 {
+  //..get the keyword if present and if not present then set an error message to be output
    $keyword = getKeyWordIfPresent();
-
-   if (empty($keyword)) {
-       $response = array(
-             "type" => "error",
-             "message" => "Please enter a keyword."
-       );
-   }
+   $errorMessage = (empty($keyword)) ? "Please enter a keyword." : "";
 }
 getHeader("Search For Movie", false);
-getMovieSearchBar($response);
+getMovieSearchBar($errorMessage);
 getMovieResults();
 getFooter();
 ?>

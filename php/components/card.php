@@ -1,9 +1,7 @@
 <?php
-require __DIR__.'/movieDetailComponents.php';
-function getMovieRecommendations($movieTitle, $genres) {
-    $_SESSION['movieTitle'] = $movieTitle;
-    $_SESSION['movieGenres'] = $movieGenres;
-}
+//A component class used for displaying any card elements on the browser - these cards are used to present movies
+require_once(__DIR__.'/movieDetailComponents.php');
+
 function getStandardCard($movieData) {
   $title = $movieData["title"];
   $tagLine = $movieData["tagline"];
@@ -26,7 +24,6 @@ function getStandardCard($movieData) {
         </div>
            <div class="card-footer">
              <a href="" class="btn btn-primary btn-block" onclick="<?php echo "insertMovieIntoDb("."'".addslashes($title)."', '".addslashes($tagLine)."', '".$posterPath."', '".htmlentities(json_encode($genres))."');return false;" ?>">Store as Favourite</a>
-             <!--<a href="movieRecommendations.php" class="btn btn-dark btn-block" onclick="<?php echo "getMovieRecommendations("."'".addslashes($title)."', '".htmlentities(json_encode($genres))."');" ?>">View Similar Recommendations</a>-->
            </div>
      </div>
  </div>
@@ -53,7 +50,6 @@ function getDeleteCard($id, $title, $tagLine, $posterPath) {
 function getDeletionCardFooter($id) { ?>
   <div class="card-footer">
     <a href="" class="btn btn-danger btn-block" onclick="<?php echo "removeMovieFromDb($id);" ?>">Delete From Favourites</a>
-    <!--<a href="" class="btn btn-dark btn-block">View Similar Recommendations</a>-->
   </div>
 <?php
 }
